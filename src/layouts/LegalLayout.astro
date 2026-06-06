@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+import AnalyticsHead from '../components/AnalyticsHead.astro';
+import AnalyticsNoscript from '../components/AnalyticsNoscript.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#2A8E68" />
+    <AnalyticsHead />
+  </head>
+  <body>
+    <AnalyticsNoscript />
+    <header class="legal-header">
+      <a class="brand" href="/" aria-label="Accueil ZoiCare">
+        <img src="/zoicare-logo.svg" alt="ZoiCare" width="168" height="60" />
+      </a>
+      <a class="header-cta" href="/">Retour au site</a>
+    </header>
+    <main class="legal-page">
+      <article class="legal-content">
+        <slot />
+      </article>
+    </main>
+    <CookieConsent lang="fr" />
+  </body>
+</html>

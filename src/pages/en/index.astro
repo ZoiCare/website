@@ -1,0 +1,405 @@
+---
+import '../../styles/global.css';
+import AnalyticsHead from '../../components/AnalyticsHead.astro';
+import AnalyticsNoscript from '../../components/AnalyticsNoscript.astro';
+import CookieConsent from '../../components/CookieConsent.astro';
+
+const appStoreUrl = 'https://apps.apple.com/search?term=Zoicare';
+const googlePlayUrl = 'https://play.google.com/store/search?q=Zoicare&c=apps';
+const canonical = 'https://zoicare.fr/en/';
+const title = 'ZoiCare - Pet appointments and health record for dogs, cats and NACs';
+const description = 'With ZoiCare, find vets, groomers, trainers and other pet professionals, book appointments and keep your pet health record in one simple place.';
+const faqs = [
+  {
+    question: 'What is ZoiCare for?',
+    answer: 'ZoiCare brings together two everyday needs: booking appointments with the right pet professionals and keeping your pet health record in one place.',
+  },
+  {
+    question: 'Which professionals can I book with?',
+    answer: 'ZoiCare is designed for appointments with vets, groomers, trainers, behaviour specialists, pet sitters and other professionals who help care for your pet.',
+  },
+  {
+    question: 'Can ZoiCare replace my paper pet health record?',
+    answer: 'ZoiCare helps you keep a clear copy of important information. A paper record may still be useful depending on your vet, but the app helps you avoid searching for everything at the last minute.',
+  },
+  {
+    question: 'Can I track vaccines and treatments?',
+    answer: 'Yes. ZoiCare is made to help you find vaccines, treatments, dewormers, parasite prevention, prescriptions and follow-up reminders more easily.',
+  },
+  {
+    question: 'Can I follow several pets?',
+    answer: 'Yes. Each pet can have its own profile, health record, documents, appointments and reminders.',
+  },
+  {
+    question: 'Does ZoiCare replace a vet?',
+    answer: 'No. ZoiCare helps you stay organised. Medical advice, diagnoses and treatment decisions must always come from a veterinary professional.',
+  },
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: 'ZoiCare',
+  operatingSystem: 'iOS, Android',
+  applicationCategory: 'HealthApplication',
+  description,
+  url: canonical,
+  keywords: 'pet appointment booking, vet appointment, pet groomer appointment, pet trainer, pet health record, dog health record, cat health record, pet vaccine reminder',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'EUR',
+  },
+};
+
+const faqStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
+const websiteStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'ZoiCare',
+  url: canonical,
+  description,
+  publisher: {
+    '@type': 'Organization',
+    name: 'ZoiCare',
+    url: 'https://zoicare.fr/',
+    logo: 'https://zoicare.fr/zoicare-logo.svg',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'contact@zoicare.fr',
+      contactType: 'customer support',
+      availableLanguage: ['en', 'fr'],
+    },
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="fr" href="https://zoicare.fr/" />
+    <link rel="alternate" hreflang="en" href="https://zoicare.fr/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://zoicare.fr/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#2A8E68" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="ZoiCare" />
+    <meta property="og:image" content="https://zoicare.fr/charte.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <AnalyticsHead />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteStructuredData)} />
+  </head>
+  <body>
+    <AnalyticsNoscript />
+    <header class="site-header" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="ZoiCare home">
+        <img src="/zoicare-logo.svg" alt="ZoiCare" width="168" height="60" />
+      </a>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#pet-care-guide">Pet care guide</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="/" hreflang="fr" aria-label="Version française">FR</a>
+      </nav>
+      <a class="header-cta" href="#download">Download</a>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell">
+        <div class="hero-copy">
+          <p class="eyebrow reveal delay-1">Pet appointments + health record</p>
+          <h1 class="reveal delay-2">Your pet’s life, simply organised.</h1>
+          <p class="hero-text">
+            Find a vet, groomer, trainer or another pet professional. Book appointments, keep your dog, cat or NAC health record,
+            and find vaccines, treatments and documents whenever you need them.
+          </p>
+          <div class="hero-badges" aria-label="ZoiCare key benefits">
+            <span>Vet, groomer, trainer</span>
+            <span>Dog, cat and NAC health record</span>
+            <span>Vaccines, care and appointment reminders</span>
+          </div>
+          <div class="store-actions" id="download" aria-label="Download ZoiCare">
+            <a class="store-button" href={appStoreUrl} rel="noopener" aria-label="Download ZoiCare on the App Store">
+              <img src="/apple-logo.svg" alt="" width="24" height="24" />
+              <span><small>Download on the</small><strong>App Store</strong></span>
+            </a>
+            <a class="store-button store-button-dark" href={googlePlayUrl} rel="noopener" aria-label="Download ZoiCare on Google Play">
+              <img src="/google-play-logo.svg" alt="" width="24" height="24" />
+              <span><small>Get it on</small><strong>Google Play</strong></span>
+            </a>
+            <a class="secondary-link" href="#how-it-works">See how it helps</a>
+          </div>
+          <p class="microcopy">Made for pet owners who want to find everything quickly, without thinking about it every day.</p>
+        </div>
+        <div class="hero-visual" aria-label="ZoiCare app preview">
+          <div class="orbit orbit-one" aria-hidden="true"></div>
+          <div class="orbit orbit-two" aria-hidden="true"></div>
+          <div class="app-screens" aria-label="ZoiCare app screenshots">
+            <figure class="screen-shot screen-home">
+              <img src="/IMG_3020.jpg" alt="ZoiCare home screen with appointment booking and pet services" width="976" height="2000" />
+              <figcaption>Home and appointments</figcaption>
+            </figure>
+            <figure class="screen-shot screen-health">
+              <img src="/health.jpg" alt="ZoiCare health screen with vaccines, treatments, notes and documents" width="950" height="1996" />
+              <figcaption>Pet health record</figcaption>
+            </figure>
+          </div>
+          <div class="floating-note note-one">Health record at hand</div>
+          <div class="floating-note note-two">A reminder when needed</div>
+        </div>
+      </section>
+
+      <section class="trust-strip" aria-label="What ZoiCare simplifies">
+        <div class="trust-intro">
+          <p class="eyebrow">What changes</p>
+          <h2>Before an appointment, everything is ready.</h2>
+          <p>No more searching through papers, photos or messages when a professional asks a simple question.</p>
+        </div>
+        <div class="trust-grid">
+          <article>
+            <span aria-hidden="true">01</span>
+            <h3>Find useful information</h3>
+            <p>Vaccines, treatments, prescriptions, weight, allergies: the important details stay in one place.</p>
+          </article>
+          <article>
+            <span aria-hidden="true">02</span>
+            <h3>Prepare the right appointment</h3>
+            <p>Vet, groomer, trainer or another professional: you know what to share before or during the visit.</p>
+          </article>
+          <article>
+            <span aria-hidden="true">03</span>
+            <h3>Avoid small oversights</h3>
+            <p>Vaccine reminders, regular care and upcoming appointments: ZoiCare helps you keep track.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="brand-showcase section-shell" aria-label="The pet care organisation problem">
+        <div>
+          <p class="eyebrow">The problem</p>
+          <h2>You love your pet, but appointments and health information often end up scattered.</h2>
+          <p>A vaccine in a paper booklet, a prescription in your photos, a reminder in your head, an appointment in a message. When you need the information, it is rarely the right moment to search.</p>
+        </div>
+        <img class="section-screenshot" src="/health.jpg" alt="ZoiCare Health screen with vaccines, treatments, notes and documents grouped together" loading="lazy" />
+      </section>
+
+      <section class="section-shell split" id="features">
+        <div>
+          <p class="eyebrow">What changes</p>
+          <h2>Less searching, fewer forgotten dates, more peace of mind.</h2>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <span>01</span>
+            <h3>Book the right appointment</h3>
+            <p>Vet, groomer, trainer, behaviour specialist or another pet service: find the right professional more easily.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Keep the health record together</h3>
+            <p>Vaccines, weight, allergies, treatments and prescriptions stay neatly organised.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Never lose key dates</h3>
+            <p>Vaccine, dewormer, grooming, check-up or next appointment: ZoiCare becomes your simple reminder.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Follow every pet at home</h3>
+            <p>Dog, cat or NAC: each pet keeps its own history, appointments and reminders.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="how-it-works section-shell" id="how-it-works">
+        <div class="section-intro">
+          <p class="eyebrow">How it works</p>
+          <h2>In a few simple steps, pet care becomes clearer.</h2>
+          <p>You do not need to be perfectly organised. ZoiCare simply helps you stop keeping everything in your head.</p>
+        </div>
+        <div class="steps-grid">
+          <article>
+            <span>1</span>
+            <h3>Add your pet</h3>
+            <p>Name, age, weight, vaccines and documents you want to keep.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Plan appointments</h3>
+            <p>Keep track of upcoming visits with vets, groomers, trainers and other professionals.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Get useful reminders</h3>
+            <p>When a date is coming up, you know what to prepare for your pet.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="seo-panel section-shell" id="pet-care-guide">
+        <div class="seo-content">
+          <p class="eyebrow">Pet care</p>
+          <h2>Why combine pet appointments and health records in one app?</h2>
+          <p>
+            When you love your pet, you want to do things right. But between the vet, the groomer, the trainer, vaccines,
+            treatments, check-ups and papers to find, it is easy to miss a date or lose a document.
+          </p>
+          <p>
+            ZoiCare gathers the useful information for your dog, cat or NAC in one simple place. You keep the health record
+            at hand, prepare appointments with pet professionals and avoid everyday oversights.
+          </p>
+          <a class="text-cta" href="#download">Organise my pet’s care</a>
+        </div>
+        <aside class="keyword-card" aria-label="ZoiCare related searches">
+          <h3>Easy to find</h3>
+          <ul>
+            <li>pet professional appointment</li>
+            <li>vet, groomer, trainer appointment</li>
+            <li>dog and cat health record</li>
+            <li>pet vaccine reminder</li>
+            <li>pet health app</li>
+            <li>pet health documents</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="section-shell audience">
+        <p class="eyebrow">Who is it for?</p>
+        <h2>For anyone who wants to do right by their pet.</h2>
+        <div class="audience-grid">
+          <article>
+            <h3>Dogs</h3>
+            <p>Vaccines, reminders, treatments, weight and check-ups stay easy to find.</p>
+          </article>
+          <article>
+            <h3>Cats</h3>
+            <p>Keep health history and upcoming appointments in one clear place.</p>
+          </article>
+          <article>
+            <h3>NACs and other companions</h3>
+            <p>Follow specific care needs and information to share with professionals.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="comparison section-shell" aria-label="Before and after ZoiCare">
+        <div class="before-after before">
+          <p class="eyebrow">Before</p>
+          <h3>Papers, dates and memories scattered everywhere.</h3>
+          <ul>
+            <li>A paper record you cannot always find</li>
+            <li>A vaccine or appointment date to double-check</li>
+            <li>A prescription lost in your photos</li>
+          </ul>
+        </div>
+        <div class="before-after after">
+          <p class="eyebrow">With ZoiCare</p>
+          <h3>Your pet’s appointments and key information in one place.</h3>
+          <ul>
+            <li>An accessible pet health record</li>
+            <li>Reminders for care and important appointments</li>
+            <li>Appointments that are easier to prepare</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="faq section-shell" id="faq">
+        <div class="faq-intro">
+          <p class="eyebrow">FAQ</p>
+          <h2>Questions pet owners ask when they want to keep better track.</h2>
+          <p>Simple answers, without jargon, to understand how ZoiCare can help day to day.</p>
+        </div>
+        <div class="faq-list">
+          {faqs.map((item) => (
+            <details>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section class="final-cta section-shell">
+        <p class="eyebrow">Download ZoiCare</p>
+        <h2>Appointments, records, reminders: everything for your pet in one place.</h2>
+        <p>ZoiCare helps you organise appointments with pet professionals and keep your companion’s health information close at hand.</p>
+        <div class="store-actions centered">
+          <a class="store-button" href={appStoreUrl} rel="noopener">
+            <img src="/apple-logo.svg" alt="" width="24" height="24" />
+            <span><small>Download on the</small><strong>App Store</strong></span>
+          </a>
+          <a class="store-button store-button-dark" href={googlePlayUrl} rel="noopener">
+            <img src="/google-play-logo.svg" alt="" width="24" height="24" />
+            <span><small>Get it on</small><strong>Google Play</strong></span>
+          </a>
+        </div>
+      </section>
+
+      <section class="contact-section section-shell" id="contact">
+        <div class="contact-copy">
+          <p class="eyebrow">Contact</p>
+          <h2>A question about ZoiCare?</h2>
+          <p>
+            You can write to us to ask a question, report an issue or follow the app launch.
+            We keep answers simple, without jargon.
+          </p>
+        </div>
+        <div class="contact-card">
+          <h3>Write to us</h3>
+          <p>For any ZoiCare request, use this email address:</p>
+          <a class="contact-email" href="mailto:contact@zoicare.fr">contact@zoicare.fr</a>
+          <p class="contact-note">Do not send medical emergencies by email. If you are worried about your pet’s health, contact a vet directly.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand" href="#top" aria-label="Back to top">
+        <img src="/zoicare-logo.svg" alt="ZoiCare" width="168" height="60" loading="lazy" />
+      </a>
+      <div class="footer-content">
+        <p>© 2026 ZoiCare. Pet professional appointments, pet health record and care reminders.</p>
+        <nav class="footer-links" aria-label="Legal links">
+          <a href="/mentions-legales/">Legal notice</a>
+          <a href="/politique-confidentialite/">Privacy</a>
+          <a href="/cookies/">Cookies</a>
+          <a href="/conditions-utilisation/">Terms</a>
+          <a href="/plan-du-site/">Sitemap</a>
+          <a href="#contact">Contact</a>
+          <a href="/" hreflang="fr">Français</a>
+        </nav>
+      </div>
+    </footer>
+    <CookieConsent lang="en" />
+  </body>
+</html>

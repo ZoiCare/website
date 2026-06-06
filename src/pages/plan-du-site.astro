@@ -1,0 +1,31 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const pages = [
+  { href: '/', label: 'Accueil ZoiCare', description: 'Rendez-vous avec professionnels animaliers, carnet de santé animal et rappels.' },
+  { href: '/#fonctionnalites', label: 'Fonctionnalités', description: 'Prise de rendez-vous, carnet de santé, documents et rappels.' },
+  { href: '/#comment-ca-marche', label: 'Comment ça marche', description: 'Les étapes simples pour organiser le suivi de votre animal.' },
+  { href: '/#seo-veterinaire', label: 'Guide santé animale', description: 'Pourquoi réunir rendez-vous animaliers et carnet de santé.' },
+  { href: '/#faq', label: 'FAQ', description: 'Questions fréquentes sur ZoiCare.' },
+  { href: '/#contact', label: 'Contact', description: 'Contacter ZoiCare à contact@zoicare.fr.' },
+  { href: '/mentions-legales/', label: 'Mentions légales', description: 'Informations légales du site ZoiCare.' },
+  { href: '/politique-confidentialite/', label: 'Politique de confidentialité', description: 'Traitement des données personnelles et droits RGPD.' },
+  { href: '/cookies/', label: 'Cookies', description: 'Informations sur les cookies et le consentement.' },
+  { href: '/conditions-utilisation/', label: 'Conditions générales d’utilisation', description: 'Conditions applicables à l’utilisation de ZoiCare.' },
+];
+---
+
+<LegalLayout title="Plan du site - ZoiCare" description="Plan du site ZoiCare : landing page, FAQ, contact, mentions légales, confidentialité, cookies et CGU.">
+  <p class="eyebrow">Navigation</p>
+  <h1>Plan du site</h1>
+  <p>Retrouvez les principales pages de ZoiCare et les informations utiles pour les propriétaires d’animaux.</p>
+
+  <div class="sitemap-list">
+    {pages.map((page) => (
+      <a href={page.href}>
+        <strong>{page.label}</strong>
+        <span>{page.description}</span>
+      </a>
+    ))}
+  </div>
+</LegalLayout>

@@ -1,0 +1,59 @@
+---
+const lang = Astro.props.lang ?? 'fr';
+const copy = lang === 'en'
+  ? {
+      text: 'ZoiCare uses audience measurement cookies to improve the website. You can accept or refuse them.',
+      accept: 'Accept',
+      refuse: 'Refuse',
+      link: 'Learn more',
+      href: '/cookies/',
+    }
+  : {
+      text: 'ZoiCare utilise des cookies de mesure d’audience pour améliorer le site. Vous pouvez les accepter ou les refuser.',
+      accept: 'Accepter',
+      refuse: 'Refuser',
+      link: 'En savoir plus',
+      href: '/cookies/',
+    };
+---
+
+<div class="cookie-banner" data-cookie-banner hidden>
+  <p>{copy.text} <a href={copy.href}>{copy.link}</a></p>
+  <div class="cookie-actions">
+    <button type="button" data-cookie-refuse>{copy.refuse}</button>
+    <button type="button" data-cookie-accept>{copy.accept}</button>
+  </div>
+</div>
+
+<script is:inline>
+  const banner = document.querySelector('[data-cookie-banner]');
+  const accept = document.querySelector('[data-cookie-accept]');
+  const refuse = document.querySelector('[data-cookie-refuse]');
+  const choice = localStorage.getItem('zoicare_cookie_consent');
+
+  if (banner && !choice) {
+    banner.hidden = false;
+  }
+
+  accept?.addEventListener('click', () => {
+    localStorage.setItem('zoicare_cookie_consent', 'accepted');
+    window.gtag?.('consent', 'update', {
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted',
+    });
+    if (banner) banner.hidden = true;
+  });
+
+  refuse?.addEventListener('click', () => {
+    localStorage.setItem('zoicare_cookie_consent', 'refused');
+    window.gtag?.('consent', 'update', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    });
+    if (banner) banner.hidden = true;
+  });
+</script>

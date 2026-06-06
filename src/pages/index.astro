@@ -1,0 +1,415 @@
+---
+import '../styles/global.css';
+import AnalyticsHead from '../components/AnalyticsHead.astro';
+import AnalyticsNoscript from '../components/AnalyticsNoscript.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+
+const appStoreUrl = 'https://apps.apple.com/fr/search?term=Zoicare';
+const googlePlayUrl = 'https://play.google.com/store/search?q=Zoicare&c=apps';
+const canonical = 'https://zoicare.fr/';
+const title = 'ZoiCare - Rendez-vous animalier et carnet de santé pour chien, chat et NAC';
+const description = 'Avec ZoiCare, trouvez un vétérinaire, toiletteur, éducateur ou autre professionnel animalier, prenez rendez-vous et gardez le carnet de santé de votre chien, chat ou NAC au même endroit.';
+const faqs = [
+  {
+    question: 'ZoiCare sert à quoi ?',
+    answer: 'ZoiCare réunit deux choses simples : prendre rendez-vous avec les bons professionnels animaliers et garder le carnet de santé de votre animal au même endroit.',
+  },
+  {
+    question: 'Avec quels professionnels puis-je prendre rendez-vous ?',
+    answer: 'ZoiCare est pensé pour les rendez-vous avec les vétérinaires, toiletteurs, éducateurs, comportementalistes et autres professionnels utiles au bien-être de votre animal.',
+  },
+  {
+    question: 'Est-ce que ZoiCare peut remplacer le carnet de santé papier de mon animal ?',
+    answer: 'ZoiCare vous permet de garder une copie claire des informations importantes. Le carnet papier peut rester utile selon votre vétérinaire, mais l’app évite de tout chercher au dernier moment.',
+  },
+  {
+    question: 'Puis-je noter les vaccins et les traitements de mon animal ?',
+    answer: 'Oui. L’objectif est de retrouver facilement les vaccins, traitements, vermifuges, antiparasitaires, ordonnances et rappels de suivi.',
+  },
+  {
+    question: 'Puis-je suivre plusieurs animaux ?',
+    answer: 'Oui. Chaque animal peut avoir son profil, son carnet de santé, ses documents, ses rendez-vous et ses rappels.',
+  },
+  {
+    question: 'Est-ce utile si mon animal est jeune ou en bonne santé ?',
+    answer: 'Oui, car les premiers mois demandent souvent plusieurs vaccins, rappels et contrôles. Garder l’historique dès le début rend le suivi plus simple ensuite.',
+  },
+  {
+    question: 'Quelles informations préparer avant un rendez-vous avec un professionnel ?',
+    answer: 'Selon le rendez-vous, vous pouvez préparer les vaccins, traitements en cours, allergies connues, anciens documents, habitudes de votre animal ou questions à poser. ZoiCare aide à rassembler ces éléments.',
+  },
+  {
+    question: 'ZoiCare remplace-t-elle le vétérinaire ?',
+    answer: 'Non. ZoiCare vous aide à vous organiser. Les conseils médicaux, diagnostics et décisions de soin restent toujours du ressort d’un vétérinaire.',
+  },
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: 'ZoiCare',
+  operatingSystem: 'iOS, Android',
+  applicationCategory: 'HealthApplication',
+  description,
+  url: canonical,
+  keywords: 'rendez-vous vétérinaire, toiletteur animal, éducateur canin, carnet de santé animal, carnet de santé chien, carnet de santé chat, rappel vaccin animal',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'EUR',
+  },
+};
+
+const faqStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
+const websiteStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'ZoiCare',
+  url: canonical,
+  description,
+  publisher: {
+    '@type': 'Organization',
+    name: 'ZoiCare',
+    url: canonical,
+    logo: 'https://zoicare.fr/zoicare-logo.svg',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'contact@zoicare.fr',
+      contactType: 'customer support',
+      availableLanguage: 'fr',
+    },
+  },
+};
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="fr" href="https://zoicare.fr/" />
+    <link rel="alternate" hreflang="en" href="https://zoicare.fr/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://zoicare.fr/" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#2A8E68" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="ZoiCare" />
+    <meta property="og:image" content="https://zoicare.fr/charte.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <AnalyticsHead />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteStructuredData)} />
+  </head>
+  <body>
+    <AnalyticsNoscript />
+    <header class="site-header" aria-label="Navigation principale">
+      <a class="brand" href="#top" aria-label="Accueil ZoiCare">
+        <img src="/zoicare-logo.svg" alt="ZoiCare" width="168" height="60" />
+      </a>
+      <nav class="nav-links" aria-label="Sections de la page">
+        <a href="#fonctionnalites">Fonctionnalités</a>
+        <a href="#comment-ca-marche">Comment ça marche</a>
+        <a href="#seo-veterinaire">Guide santé</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="/en/" hreflang="en" aria-label="English version">EN</a>
+      </nav>
+      <a class="header-cta" href="#telecharger">Télécharger</a>
+    </header>
+
+    <main id="top">
+      <section class="hero section-shell">
+        <div class="hero-copy">
+          <p class="eyebrow reveal delay-1">Rendez-vous animaliers + carnet de santé</p>
+          <h1 class="reveal delay-2">Toute la vie de votre animal, simplement organisée.</h1>
+          <p class="hero-text">
+            Trouvez un vétérinaire, un toiletteur, un éducateur ou un autre professionnel animalier. Prenez rendez-vous,
+            gardez le carnet de santé de votre chien, chat ou NAC, et retrouvez ses vaccins, traitements et documents quand vous en avez besoin.
+          </p>
+          <div class="hero-badges" aria-label="Points forts ZoiCare">
+            <span>Vétérinaire, toiletteur, éducateur</span>
+            <span>Carnet de santé chien, chat, NAC</span>
+            <span>Rappels vaccins, soins et rendez-vous</span>
+          </div>
+          <div class="store-actions" id="telecharger" aria-label="Télécharger ZoiCare">
+            <a class="store-button" href={appStoreUrl} rel="noopener" aria-label="Télécharger ZoiCare sur l’App Store">
+              <img src="/apple-logo.svg" alt="" width="24" height="24" />
+              <span><small>Disponible sur</small><strong>App Store</strong></span>
+            </a>
+            <a class="store-button store-button-dark" href={googlePlayUrl} rel="noopener" aria-label="Télécharger ZoiCare sur Google Play">
+              <img src="/google-play-logo.svg" alt="" width="24" height="24" />
+              <span><small>Disponible sur</small><strong>Google Play</strong></span>
+            </a>
+            <a class="secondary-link" href="#comment-ca-marche">Voir comment ça aide</a>
+          </div>
+          <p class="microcopy">Une app pensée pour les propriétaires qui veulent tout retrouver vite, sans y penser tous les jours.</p>
+        </div>
+        <div class="hero-visual" aria-label="Aperçu de l’application ZoiCare">
+          <div class="orbit orbit-one" aria-hidden="true"></div>
+          <div class="orbit orbit-two" aria-hidden="true"></div>
+          <div class="app-screens" aria-label="Captures de l’application ZoiCare">
+            <figure class="screen-shot screen-home">
+              <img src="/IMG_3020.jpg" alt="Écran d’accueil ZoiCare avec bouton de prise de rendez-vous et services vétérinaire, toiletteur, éducateur et pet-sitter" width="976" height="2000" />
+              <figcaption>Accueil et prise de rendez-vous</figcaption>
+            </figure>
+            <figure class="screen-shot screen-health">
+              <img src="/health.jpg" alt="Écran santé ZoiCare avec carnet de santé, vaccins, traitements, observations et documents" width="950" height="1996" />
+              <figcaption>Carnet de santé animal</figcaption>
+            </figure>
+          </div>
+          <div class="floating-note note-one">Carnet toujours sous la main</div>
+          <div class="floating-note note-two">Un rappel quand il faut</div>
+        </div>
+      </section>
+
+      <section class="trust-strip" aria-label="Ce que ZoiCare simplifie au quotidien">
+        <div class="trust-intro">
+          <p class="eyebrow">Ce que ça change</p>
+          <h2>Avant un rendez-vous, tout est déjà prêt.</h2>
+          <p>Plus besoin de chercher dans les papiers, les photos ou les messages au moment où le professionnel vous pose une question.</p>
+        </div>
+        <div class="trust-grid">
+          <article>
+            <span aria-hidden="true">01</span>
+            <h3>Retrouver les infos utiles</h3>
+            <p>Vaccins, traitements, ordonnances, poids, allergies : les informations importantes restent au même endroit.</p>
+          </article>
+          <article>
+            <span aria-hidden="true">02</span>
+            <h3>Préparer le bon rendez-vous</h3>
+            <p>Vétérinaire, toiletteur, éducateur ou autre professionnel : vous savez quoi transmettre avant ou pendant la visite.</p>
+          </article>
+          <article>
+            <span aria-hidden="true">03</span>
+            <h3>Éviter les petits oublis</h3>
+            <p>Rappels de vaccins, soins réguliers, prochains rendez-vous : ZoiCare aide à garder le fil sans tout retenir.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="brand-showcase section-shell" aria-label="Le problème du suivi santé d’un animal">
+        <div>
+          <p class="eyebrow">Le problème</p>
+          <h2>On aime son animal, mais ses rendez-vous et ses informations de santé finissent souvent éparpillés.</h2>
+          <p>Un vaccin noté dans un carnet papier, une ordonnance prise en photo, un rappel dans la tête, un rendez-vous dans un SMS. Le jour où il faut retrouver l’information, ce n’est jamais le bon moment.</p>
+        </div>
+        <img class="section-screenshot" src="/health.jpg" alt="Écran Santé ZoiCare avec vaccins, traitements, observations et documents de l’animal regroupés au même endroit" loading="lazy" />
+      </section>
+
+      <section class="section-shell split" id="fonctionnalites">
+        <div>
+          <p class="eyebrow">Ce qui change</p>
+          <h2>Moins de recherches, moins d’oublis, plus de sérénité.</h2>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <span>01</span>
+            <h3>Réserver le bon rendez-vous</h3>
+            <p>Vétérinaire, toiletteur, éducateur, comportementaliste ou autre service animalier : trouvez plus facilement le bon professionnel.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Centraliser le carnet de santé</h3>
+            <p>Vaccins, poids, allergies, traitements et ordonnances restent rangés au même endroit.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Ne plus perdre les dates importantes</h3>
+            <p>Vaccin, vermifuge, antiparasitaire, toilettage, contrôle ou prochain rendez-vous : ZoiCare devient votre aide-mémoire.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Suivre chaque animal de la famille</h3>
+            <p>Chien, chat ou NAC : chacun garde son propre historique, ses rendez-vous et ses rappels.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="how-it-works section-shell" id="comment-ca-marche">
+        <div class="section-intro">
+          <p class="eyebrow">Comment ça marche</p>
+          <h2>En quelques gestes, tout le suivi devient plus clair.</h2>
+          <p>Pas besoin d’être parfaitement organisé. L’idée est simplement de ne pas tout garder en tête.</p>
+        </div>
+        <div class="steps-grid">
+          <article>
+            <span>1</span>
+            <h3>Ajoutez votre animal</h3>
+            <p>Son nom, son âge, son poids, ses vaccins et les documents que vous voulez garder.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Planifiez ses rendez-vous</h3>
+            <p>Vous gardez une trace des rendez-vous à venir avec vétérinaire, toiletteur, éducateur ou autre professionnel.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Recevez les rappels utiles</h3>
+            <p>Quand une date approche, vous savez quoi prévoir pour votre animal.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="seo-panel section-shell" id="seo-veterinaire">
+        <div class="seo-content">
+          <p class="eyebrow">Santé animale</p>
+          <h2>Pourquoi réunir rendez-vous animaliers et carnet de santé dans une seule app ?</h2>
+          <p>
+            Quand on aime son animal, on veut faire les choses correctement. Mais entre les rendez-vous chez le vétérinaire,
+            le toiletteur, l’éducateur, les vaccins,
+            les traitements, les visites de contrôle et les papiers à retrouver, il est facile d’oublier une date ou de ne plus savoir
+            où se trouve une ordonnance.
+          </p>
+          <p>
+            ZoiCare rassemble les informations utiles de votre chien, chat ou NAC dans un endroit simple. Vous gardez son carnet de santé
+            à portée de main, vous préparez les rendez-vous avec les professionnels animaliers et vous évitez les oublis du quotidien.
+          </p>
+          <a class="text-cta" href="#telecharger">Organiser le suivi de mon animal</a>
+        </div>
+        <aside class="keyword-card" aria-label="Recherches liées à ZoiCare">
+          <h3>Pour retrouver facilement</h3>
+          <ul>
+            <li>rendez-vous professionnel animalier</li>
+            <li>rendez-vous vétérinaire, toiletteur, éducateur</li>
+            <li>carnet de santé chien et chat</li>
+            <li>rappel vaccin animal</li>
+            <li>application santé animale</li>
+            <li>documents santé de mon animal</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="section-shell audience">
+        <p class="eyebrow">Pour qui ?</p>
+        <h2>Pour toutes les personnes qui veulent bien faire pour leur animal.</h2>
+        <div class="audience-grid">
+          <article>
+            <h3>Chien</h3>
+            <p>Vaccins, rappels, traitements, poids et visites de contrôle restent faciles à retrouver.</p>
+          </article>
+          <article>
+            <h3>Chat</h3>
+            <p>Vous gardez l’historique de santé et les prochains rendez-vous dans un endroit clair.</p>
+          </article>
+          <article>
+            <h3>NAC et autres compagnons</h3>
+            <p>Vous suivez plus facilement les soins spécifiques et les informations à transmettre aux professionnels.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="comparison section-shell" aria-label="Avant et après ZoiCare">
+        <div class="before-after before">
+          <p class="eyebrow">Avant</p>
+          <h3>Des papiers, des dates et des souvenirs un peu partout.</h3>
+          <ul>
+            <li>Un carnet papier qu’on ne retrouve pas toujours</li>
+            <li>Une date de vaccin ou de rendez-vous à vérifier</li>
+            <li>Une ordonnance perdue dans les photos</li>
+          </ul>
+        </div>
+        <div class="before-after after">
+          <p class="eyebrow">Avec ZoiCare</p>
+          <h3>Les rendez-vous et informations importantes de votre animal au même endroit.</h3>
+          <ul>
+            <li>Un carnet de santé animal accessible</li>
+            <li>Des rappels pour les soins et rendez-vous importants</li>
+            <li>Un rendez-vous plus facile à préparer</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="faq section-shell" id="faq">
+        <div class="faq-intro">
+          <p class="eyebrow">FAQ</p>
+          <h2>Les questions qu’on se pose quand on veut bien suivre la santé de son animal.</h2>
+          <p>Des réponses simples, sans jargon, pour comprendre comment ZoiCare peut aider au quotidien.</p>
+        </div>
+        <div class="faq-list">
+          {faqs.map((item) => (
+            <details>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section class="final-cta section-shell">
+        <p class="eyebrow">Télécharger ZoiCare</p>
+        <h2>Les rendez-vous, le carnet, les rappels : tout pour votre animal au même endroit.</h2>
+        <p>ZoiCare vous aide à organiser les rendez-vous avec les professionnels animaliers et à garder les informations de santé de votre compagnon sous la main.</p>
+        <div class="store-actions centered">
+          <a class="store-button" href={appStoreUrl} rel="noopener">
+            <img src="/apple-logo.svg" alt="" width="24" height="24" />
+            <span><small>Disponible sur</small><strong>App Store</strong></span>
+          </a>
+          <a class="store-button store-button-dark" href={googlePlayUrl} rel="noopener">
+            <img src="/google-play-logo.svg" alt="" width="24" height="24" />
+            <span><small>Disponible sur</small><strong>Google Play</strong></span>
+          </a>
+        </div>
+      </section>
+
+      <section class="contact-section section-shell" id="contact">
+        <div class="contact-copy">
+          <p class="eyebrow">Contact</p>
+          <h2>Une question sur ZoiCare ?</h2>
+          <p>
+            Vous pouvez nous écrire pour poser une question, signaler un problème ou suivre l’arrivée de l’application.
+            On répond simplement, sans jargon.
+          </p>
+        </div>
+        <div class="contact-card">
+          <h3>Nous écrire</h3>
+          <p>Pour toute demande concernant ZoiCare, utilisez l’adresse suivante :</p>
+          <a class="contact-email" href="mailto:contact@zoicare.fr">contact@zoicare.fr</a>
+          <p class="contact-note">Ne transmettez pas d’urgence médicale par email. En cas de doute sur la santé de votre animal, contactez directement un vétérinaire.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand" href="#top" aria-label="Retour en haut de page">
+        <img src="/zoicare-logo.svg" alt="ZoiCare" width="168" height="60" loading="lazy" />
+      </a>
+      <div class="footer-content">
+        <p>© 2026 ZoiCare. Rendez-vous avec professionnels animaliers, carnet de santé animal et rappels de suivi.</p>
+        <nav class="footer-links" aria-label="Liens légaux">
+          <a href="/mentions-legales/">Mentions légales</a>
+          <a href="/politique-confidentialite/">Confidentialité</a>
+          <a href="/cookies/">Cookies</a>
+          <a href="/conditions-utilisation/">CGU</a>
+          <a href="/plan-du-site/">Plan du site</a>
+          <a href="#contact">Contact</a>
+          <a href="/en/" hreflang="en">English</a>
+        </nav>
+      </div>
+    </footer>
+    <CookieConsent lang="fr" />
+  </body>
+</html>

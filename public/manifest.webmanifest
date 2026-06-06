@@ -1,0 +1,16 @@
+{
+  "name": "ZoiCare",
+  "short_name": "ZoiCare",
+  "description": "Application de prise de rendez-vous vétérinaire et carnet de santé animal.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F9F7F5",
+  "theme_color": "#2A8E68",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
